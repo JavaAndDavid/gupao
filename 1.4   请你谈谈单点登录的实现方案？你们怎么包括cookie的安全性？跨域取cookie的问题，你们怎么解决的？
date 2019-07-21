@@ -1,0 +1,8 @@
+问题：
+请你谈谈单点登录的实现方案？你们怎么包括cookie的安全性？跨域取cookie的问题，你们怎么解决的？
+
+参考答案：
+单点登录使用了Redis+Cookie实现
+把用户信息放在Redis中,Key作为用户凭证存放在Cookie中放在客户端,通过获取Cookie凭证判断用户是否有登录
+Cookie的安全性,我们的凭证是唯一的UUID,使用工具类统一字符串命名,并且设置了Cookie,关闭document.cookie的取值功能
+Cookie的跨域问题,在二级域名使用共享Cookie的将多个系统的域名统一作为二级域名,统一平台提供使用主域名,cookie.setPath("/")设置Cooie路径为根路径,通过cookie.setDomain(".父域名")使得项目之间跨域互相访问他们的Cookie
